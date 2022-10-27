@@ -14,5 +14,10 @@
     "noEmit": true
   },
   "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"],
-  "references": [{ "path": "./tsconfig.node.json" }]
+  "references": [{ "path": "./tsconfig.node.json" }],
+  "paths": {
+    // 用于设置模块名到基于baseUrl的路径映射
+    "@/*": ["src/*"],
+    "cps/*": ["src/components/*"]
+  }
 }
