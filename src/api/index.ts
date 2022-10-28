@@ -1,4 +1,5 @@
-import { request } from '../service/request/index';
+import useRequest from "@/hooks/request";
+import { request } from "../service/request/index";
 
 // interface Req {
 //   q?: string
@@ -11,19 +12,22 @@ import { request } from '../service/request/index';
 
 export const getUser = (params: any) => {
   return request({
-    url: '/user/getUser',
-    method: 'GET',
-    params
-  })
-}
+    url: "/user/getUser",
+    method: "GET",
+    params,
+  });
+};
 export const getAddr = (data: any) => {
   return request({
-    url: '/search/users?q=1',
-    method: 'GET',
+    url: "/search/users?q=1",
+    method: "GET",
     data,
-  })
-}
+  });
+};
 
+export const getUsers = (name: string) => {
+  return useRequest(getUser, name);
+};
 
 // export const getAddr = (data: any) => {
 //   return request<Req, Res>({
