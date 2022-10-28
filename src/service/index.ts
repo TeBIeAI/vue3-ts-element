@@ -1,34 +1,39 @@
-import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
+import Request from './request'
+// import { RequestConfig } from './request/type'
 
-class Request {
-  instance: AxiosInstance;
-  constructor(config: AxiosRequestConfig) {
-    this.instance = axios.create(config);
+const instance = new Request({
+  baseURL: 'http://localhost:5173/',
+  interceptors: {
+    // 请求拦截器
+    // requestInterceptors: config => {
+    //   debugger
+    //   console.log('实例请求拦截器')
 
-    this.instance.interceptors.request.use(
-      (config: AxiosRequestConfig) => {
-        console.log("请求拦截");
-        return config;
-      },
-      (error) => {
-        return error;
-      }
-    );
+    //   return config
+    // },
+    // // 响应拦截器
+    // responseInterceptors: result => {
+    //   console.log('实例响应拦截器')
+    //   return result
+    // },
+  },
+})
+// console.log(instance);
 
-    this.instance.interceptors.response.use(
-      (res: AxiosResponse) => {
-        console.log("相应拦截");
-        return res.data;
-      },
-      (error) => {
-        return error;
-      }
-    );
-  }
-
-  request(config: AxiosRequestConfig) {
-    return this.instance.request(config);
-  }
+interface YWZRequestConfig<T> extends RequestConfig {
+  data?: T
 }
 
-export default Request;
+interface YWZResponse<T> {
+  code: number
+  message: string
+  data: T
+}
+
+const request = <D, T = any>(config: YWZRequestConfig<D>) => {
+
+  const { method = 'GET' } = config
+  return instance.hcrequest<YWZResponse<T>>(config)
+}
+
+export default request

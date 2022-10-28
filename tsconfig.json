@@ -9,15 +9,41 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "esModuleInterop": true,
-    "lib": ["ESNext", "DOM"],
+    "lib": [
+      "ESNext",
+      "DOM"
+    ],
     "skipLibCheck": true,
-    "noEmit": true
+    "noEmit": true,
+    "baseUrl": ".",
+    "paths": {
+      // 用于设置模块名到基于baseUrl的路径映射
+      "@/*": [
+        "src/*"
+      ],
+      "cps/*": [
+        "src/components/*"
+      ]
+    },
   },
-  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"],
-  "references": [{ "path": "./tsconfig.node.json" }],
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.d.ts",
+    "src/**/*.tsx",
+    "src/**/*.vue"
+  ],
+  "references": [
+    {
+      "path": "./tsconfig.node.json"
+    }
+  ],
   "paths": {
     // 用于设置模块名到基于baseUrl的路径映射
-    "@/*": ["src/*"],
-    "cps/*": ["src/components/*"]
-  }
+    "@/*": [
+      "src/*"
+    ],
+    "cps/*": [
+      "src/components/*"
+    ]
+  },
 }
